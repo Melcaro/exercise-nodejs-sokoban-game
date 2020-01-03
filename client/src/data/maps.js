@@ -1,4 +1,4 @@
-export const map = {
+export const maze = {
   map: `
     XXXXX             
     X   X             
@@ -15,3 +15,42 @@ XXXXX XXXX X@XXXX  ..X
   sizeX: 22,
   sizeY: 11,
 };
+
+const splittedMaze = maze.map.split('\n');
+console.log(splittedMaze);
+const defaultPostions = {
+  walls: [],
+  boxes: [],
+  targets: [],
+  bob: null,
+};
+export const mazePositions = splittedMaze.reduce(
+  (acc, row, j) => {
+    const rowPositions = row.split('').reduce((positions, cell, i) => {
+      if (cell === 'X') {
+        return { ...positions, walls: [...positions.walls, { x: i, y: j }] };
+      } else if (cell === '*') {
+        return { ...positions, boxes: [...positions.boxes, { x: i, y: j }] };
+      } else if (cell === '.') {
+        return {
+          ...positions,
+          targets: [...positions.targets, { x: i, y: j }],
+        };
+      } else if (cell === '@') {
+        console.log('hello');
+        return { ...positions, bob: { x: i, y: j } };
+      }
+
+      return positions;
+    }, defaultPostions);
+
+    return {
+      walls: [...acc.walls, ...rowPositions.walls],
+      boxes: [...acc.boxes, ...rowPositions.boxes],
+      targets: [...acc.targets, ...rowPositions.targets],
+      bob: rowPositions.bob || acc.bob,
+    };
+  },
+
+  defaultPostions
+);

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-import { map } from '../data/maps.js';
+import { maze, mazePositions } from '../data/maps.js';
 
 export class GameGrid extends Component {
   state = {
-    grid: new Array(map.sizeY).fill(new Array(map.sizeX).fill(0)),
+    grid: new Array(maze.sizeY).fill(new Array(maze.sizeX).fill(0)),
+    positions: mazePositions,
   };
   render() {
+    console.log(this.state.positions);
     const { grid } = this.state;
     return (
       <div>
