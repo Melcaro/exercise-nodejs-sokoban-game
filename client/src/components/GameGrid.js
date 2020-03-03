@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import { maze, mazePositions } from '../data/maps.js';
+
+import { Row } from './Row';
 
 export class GameGrid extends Component {
   state = {
@@ -8,18 +9,13 @@ export class GameGrid extends Component {
     positions: mazePositions,
   };
   render() {
-    console.log(this.state.positions);
-    const { grid } = this.state;
+    const { grid, positions } = this.state;
     return (
       <div>
         <h1>Sokoban game with NodeJS</h1>
         <div>
-          {grid.map((rows, i) => (
-            <div>
-              {rows.map((cell, j) => (
-                <span>0</span>
-              ))}
-            </div>
+          {grid.map((row, i) => (
+            <Row row={row} positions={positions} rowIndex={i} />
           ))}
         </div>
       </div>

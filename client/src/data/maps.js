@@ -17,7 +17,6 @@ XXXXX XXXX X@XXXX  ..X
 };
 
 const splittedMaze = maze.map.split('\n');
-console.log(splittedMaze);
 const defaultPostions = {
   walls: [],
   boxes: [],
@@ -37,7 +36,6 @@ export const mazePositions = splittedMaze.reduce(
           targets: [...positions.targets, { x: i, y: j }],
         };
       } else if (cell === '@') {
-        console.log('hello');
         return { ...positions, bob: { x: i, y: j } };
       }
 
